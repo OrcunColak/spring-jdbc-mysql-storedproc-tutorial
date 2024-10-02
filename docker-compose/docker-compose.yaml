@@ -1,0 +1,15 @@
+# psql -d db -U postgres
+version: "3.9"
+services:
+  postgres-db:
+    image: mysql:8.0
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345678
+      MYSQL_DATABASE: userdb
+      # root can log in from every host
+      MYSQL_ROOT_HOST: '%'
+    ports:
+      - '3306:3306'
+    volumes:
+      - ./initial-data.sql:/docker-entrypoint-initdb.d/initial-data.sql
